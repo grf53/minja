@@ -417,7 +417,6 @@ class chat_template {
                         }
                     }
                     if (polyfill_tool_calls) {
-                        auto content = message.at("content");
                         auto tool_calls = json::array();
                         for (const auto & tool_call : message.at("tool_calls")) {
                             if (tool_call.at("type") != "function") {
@@ -436,8 +435,11 @@ class chat_template {
                         auto obj = json {
                             {"tool_calls", tool_calls},
                         };
-                        if (!content.is_null() && !content.empty()) {
-                            obj["content"] = content;
+                        if (message.contains("content")) {
+                            auto content = message.at("content");
+                            if (!content.is_null() && !content.empty()) {
+                                obj["content"] = content;
+                            }
                         }
                         message["content"] = obj.dump(2);
                         message.erase("tool_calls");
