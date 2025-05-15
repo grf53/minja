@@ -13,7 +13,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "ar
     target_compile_options(gtest PRIVATE -Wno-language-extension-token)
 endif()
 target_link_libraries(test-syntax PRIVATE
-    nlohmann_json::nlohmann_json
+    minja
     gtest_main
     gmock
 )
@@ -28,7 +28,7 @@ else()
         target_compile_options(gtest PRIVATE -Wno-language-extension-token)
     endif()
     target_link_libraries(test-chat-template PRIVATE
-        nlohmann_json::nlohmann_json
+        minja
         gtest_main
         gmock
     )
@@ -41,7 +41,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "ar
     target_compile_options(gtest PRIVATE -Wno-language-extension-token)
 endif()
 target_link_libraries(test-polyfills PRIVATE
-    nlohmann_json::nlohmann_json
+    minja
     gtest_main
     gmock
 )
@@ -61,7 +61,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "ar
     target_compile_options(gtest PRIVATE -Wno-language-extension-token)
 endif()
 target_link_libraries(test-capabilities PRIVATE
-    nlohmann_json::nlohmann_json
+    minja
     gtest_main
     gmock
 )
@@ -77,7 +77,7 @@ target_compile_features(test-supported-template PUBLIC cxx_std_17)
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows" AND CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
     target_compile_definitions(test-supported-template PUBLIC _CRT_SECURE_NO_WARNINGS)
 endif()
-target_link_libraries(test-supported-template PRIVATE nlohmann_json::nlohmann_json)
+target_link_libraries(test-supported-template PRIVATE minja)
 
 # https://huggingface.co/models?other=conversational
 # https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard#/?types=fine-tuned%2Cchat
@@ -318,6 +318,7 @@ set(MODEL_IDS
     ValiantLabs/Llama3.1-8B-Enigma
     xwen-team/Xwen-72B-Chat
     xwen-team/Xwen-7B-Chat
+    Qwen/Qwen3-4B
 
     # Broken, TODO:
     # ai21labs/AI21-Jamba-1.5-Large        # https://github.com/google/minja/issues/8
